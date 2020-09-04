@@ -14,12 +14,15 @@ const autoComplete = {
   },
 
   fetchData: async (searchTerm) => {
-    const response = await axios.get("http://www.omdbapi.com/", {
-      params: {
-        apikey: "5cb133d8",
-        s: searchTerm,
-      },
-    });
+    const response = await axios.get(
+      "https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/",
+      {
+        params: {
+          apikey: "5cb133d8",
+          s: searchTerm,
+        },
+      }
+    );
 
     if (response.data.Error) return [];
     return response.data.Search;
@@ -52,12 +55,15 @@ let leftMovie;
 let rightMovie;
 
 const fetchEachItem = async (movie, whereToAppend, side) => {
-  const movieResponse = await axios.get("http://www.omdbapi.com/", {
-    params: {
-      apikey: "5cb133d8",
-      i: movie.imdbID,
-    },
-  });
+  const movieResponse = await axios.get(
+    "https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/",
+    {
+      params: {
+        apikey: "5cb133d8",
+        i: movie.imdbID,
+      },
+    }
+  );
 
   whereToAppend.innerHTML = movieTemplate(movieResponse.data);
 
